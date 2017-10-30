@@ -1,4 +1,42 @@
 #logo{
 
-	height: 300px;
+	height: 18vh;
+	left: 30vw;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.center {
+
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+
+
+}
+
+h1{
+	padding-bottom: 0.5em;
+}
+.input-field {
+
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 10px 20px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+ margin: 1vh;
+}
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}​
+.form-test{
+
+	display: block;
+	float: left;
 }
