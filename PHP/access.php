@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!D<!DOCTYPE html>
 <html>
 	<head> 
 		<title> FS Realty Showing </title>
@@ -17,20 +17,16 @@
 	<body>
 			<img id = "logo" src= "img/FSR_logo.png"> 
 			<h2 class="center">Showings Request Information </h2>
-		
-
 		<?php
-		include "dbconfig.php"
 
-		$con=mysql_connect($server,$login,$password,$dbname) or die ("<br> Cannot connect to DB \n");
+		include "dbconfig.php";
 
-		$query= "SELECT MLS, address, city, state, zipcode FROM FSshowings.Properties";
+		$query= "SELECT * FROM properties";
 
 		$result = mysqli_query($con, $query);
 
   echo "<div class='table-responsive'> ";
   echo "<TABLE class= 'table table-striped table-bordered' border=1>\n";
-  echo "<TR><th>ID<Th>Name<th>Balance<th>Zipcode\n";
 
 	if($result) {
 	if (mysqli_num_rows($result)>0) {
@@ -43,9 +39,15 @@
 
           echo "<TR><TD>$MLS<TD>$address<TD>$city<TD>$state<TD>$zicode\n";
       echo "</div>";
-      }
+      }}
+  }
+
+else{
+	echo "<br> Query problem detected: $query \n";
+}
 
 
-		?>
+
+      ?>
 </body>
 </html>
