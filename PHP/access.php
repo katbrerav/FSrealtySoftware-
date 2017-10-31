@@ -17,10 +17,34 @@
 	<body>
 			<img id = "logo" src= "img/FSR_logo.png"> 
 			<h2 class="center">Showings Request Information </h2>
+		
+
 		<?php
 		include "dbconfig.php"
 
-		$con=mysqli_connect($server,$login,$password,$dbname) or die ("<br> Cannot connect to DB \n");
+		$con=mysql_connect($server,$login,$password,$dbname) or die ("<br> Cannot connect to DB \n");
+
+		$query= "SELECT MLS, address, city, state, zipcode FROM FSshowings.Properties";
+
+		$result = mysqli_query($con, $query);
+
+  echo "<div class='table-responsive'> ";
+  echo "<TABLE class= 'table table-striped table-bordered' border=1>\n";
+  echo "<TR><th>ID<Th>Name<th>Balance<th>Zipcode\n";
+
+	if($result) {
+	if (mysqli_num_rows($result)>0) {
+		while($row = mysqli_fetch_array($result)){
+		  $MLS = $row['MLS'];
+          $address = $row['address']; 
+          $city = $row['city']; 
+          $state = $row['state']; 
+          $zipcode = $row['zipcode']; 
+
+          echo "<TR><TD>$MLS<TD>$address<TD>$city<TD>$state<TD>$zicode\n";
+      echo "</div>";
+      }
+
 
 		?>
 </body>
