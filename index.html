@@ -2,7 +2,9 @@
 <html>
 	<head> 
 		<title> FS Realty Showing </title>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -16,6 +18,7 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		
+		
 	</head>
 
 	<body>
@@ -25,10 +28,10 @@
 				<form action="PHP/access.php" method="post">
 					<div class="form-box">
 						<label for = "agentID">Enter License #:</label>
-						<input class="input-field" type="text" id="agentID" required="required" placeholder="Required" >
+						<input class="input-field" type="text" name="agentID" required="required" placeholder="Required" >
 
 							<label for = "fname">Full Name:</label>
-							<input class="input-field" type="text" name="fname"  required="required" placeholder="Required" >
+							<input class="input-field" type="text" name="fname" required="required" placeholder="Required" >
 					 	
 					 		<label for = "ofcname">Office Name:</label>
 							<input class="input-field" type="text" name="ofcname"  required="required" placeholder="Required" />
@@ -46,7 +49,7 @@
 							<option value="0123" selected="selected">select2/select2</option>
 
 							</select>
-					
+
 						<input type="Submit" class="btn btn-primary center"/>
 					</div>
 				</form>

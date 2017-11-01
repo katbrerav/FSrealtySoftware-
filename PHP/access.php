@@ -20,6 +20,8 @@
 		<?php
 
 		include "dbconfig.php";
+		include "storeData.php";
+
 
 		$query= "SELECT * FROM properties";
 
