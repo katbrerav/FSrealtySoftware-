@@ -22,7 +22,6 @@ h1{
 label {
 	display: block;
 	margin-bottom: 0;
-	transform: translateX(-3%);
 	
 
 }
@@ -44,4 +43,14 @@ label {
 	padding-right: : 1em;
 	margin-top: 1em;
 
+}
+
+.form-box{
+	text-align: left;
+	display: block;
+	margin: 0 auto;
+}
+form {
+	width: 200px;
+	margin: 0 auto;
 }
