@@ -40,7 +40,12 @@ $p_ID=1234;
 
 
       	/*enter your code here (HTML & PHP ) to display appropriate information. NOTE- all variables have already been retrieved, just use them at your convenience 
-
+				echo "This property's lockbox combination is " .$code;
+							if($location == 'NULL'){
+								echo "The location is not specified."
+							} else {
+								echo "The location of the lockbox combination is at " .$location;
+							}
       	*/ 
       	echo "testing- property regular lock  type"; 
       }
