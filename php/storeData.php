@@ -18,5 +18,15 @@ if (mysqli_query($con, $sql)) {
 
 }
 
+$sql = "INSERT INTO showings (MLS, agentID, timeStamp1)VALUES($location, '$agentID', '$ofice_name', '$phone', '$email')";
+
+if (mysqli_query($con, $sql)) {
+	echo "<br>New record created successfully";
+} else {
+	echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+
+}
+
+
 
 ?>
