@@ -17,22 +17,13 @@
 
 <?php
 
-$address= null;
-$city= null;
-$state= null; 
-$zip= null;
-$type= null; // type= GSMLS? OCCUPIED? REGULAR LOCKBOX?
-$code= null;
-$notes= null;
-$location=null;
 /** 
 From index.php - must receive Property GSMLS id & Agent ID 
 
 **/
 //session_start();
 include 'dbconfig.php';
-
-$p_ID=$_POST ["propertyMLS"];
+include 'storeData.php';
 // Do not let user see this page if not logged in 
 //if(!isset($_SESSION['user'])){
 	//header("Location: index.php"); 
@@ -111,13 +102,16 @@ $location=$row['location'];
 
 			if($type=="GSMLS"){ //gsmls lockboxes
 				gsmlsType($address, $city, $state, $zip, $type, $code, $notes, $location);
+        agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID);
 
 			} else if($type=="r") {//regular lockbox 
 				regularLock($address, $city, $state, $zip, $type, $code, $notes, $location);
+        agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID);
 
 
 			} else if($type=="occ"){ //occupied 
 				occupied($address, $city, $state, $zip, $type, $code, $notes, $location);
+        agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 
 			}
 
