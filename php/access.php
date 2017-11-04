@@ -16,6 +16,15 @@
       </head>
 
 <?php
+
+$address= null;
+$city= null;
+$state= null; 
+$zip= null;
+$type= null; // type= GSMLS? OCCUPIED? REGULAR LOCKBOX?
+$code= null;
+$notes= null;
+$location=null;
 /** 
 From index.php - must receive Property GSMLS id & Agent ID 
 
@@ -37,13 +46,13 @@ $address= $row['address'];
 $city= $row['city'];
 $state= $row ['state']; 
 $zip= $row ['zipcode']; 
-        $type= $row['type'];  // type= GSMLS? OCCUPIED? REGULAR LOCKBOX?
-        $code= $row['combo'];
-        $notes= $row['notes'];
-        $location=$row['location']; 
+$type= $row['type'];  // type= GSMLS? OCCUPIED? REGULAR LOCKBOX?
+$code= $row['combo'];
+$notes= $row['notes'];
+$location=$row['location']; 
 
 
-      function gsmlsType(){ // MEGHANA TO DO 
+      function gsmlsType($address, $city, $state, $zip, $type, $code, $notes, $location){ // MEGHANA TO DO 
 
       	/*enter your code here (HTML & PHP ) to display appropriate information. NOTE- all variables have already been retrieved, just use them at your convenience 
 
@@ -52,7 +61,7 @@ $zip= $row ['zipcode'];
 
       }
 
-      function regularLock(){ // JAMAAL TO DO 
+      function regularLock($address, $city, $state, $zip, $type, $code, $notes, $location){ // JAMAAL TO DO 
 
 
       	 	/*enter your code here (HTML & PHP ) to display appropriate information. NOTE- all variables have already been retrieved, just use them at your convenience 
@@ -67,10 +76,10 @@ $zip= $row ['zipcode'];
       }
       
 
-      function occupied(){
+      function occupied($address, $city, $state, $zip, $type, $code, $notes, $location){
 
       	echo "<h3> Property is OCCUPIED </h3>"; 
-      	echo "<p>Note: $notes </p>";
+      	echo "<p>Note: ". $notes."</p>";
       } 
 
 
@@ -101,14 +110,14 @@ $zip= $row ['zipcode'];
 
 
 			if($type=="GSMLS"){ //gsmls lockboxes
-				gsmlsType();
+				gsmlsType($address, $city, $state, $zip, $type, $code, $notes, $location);
 
 			} else if($type=="r") {//regular lockbox 
-				regularLock();
+				regularLock($address, $city, $state, $zip, $type, $code, $notes, $location);
 
 
 			} else if($type=="occ"){ //occupied 
-				occupied();
+				occupied($address, $city, $state, $zip, $type, $code, $notes, $location);
 
 			}
 
