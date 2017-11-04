@@ -54,3 +54,11 @@ form {
 	width: 200px;
 	margin: 0 auto;
 }
+#rcorners2 {  
+      	border-radius: 25px;
+      	border: 2px solid #000000;
+      	padding: 20px; 
+      	width: 500px;
+      	height: 450px;  
+      	left: 50%;  
+      }
