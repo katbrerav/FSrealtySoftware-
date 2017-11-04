@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head> 
+		<title> FS Realty Showing </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="Style/styles.css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+		
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		
+	</head>
+
+	<body>
+			<img id = "logo" src= "img/FSR_Logo.png"> 
+			<h2 class="center">Showings Request Information </h2>
+			<div class="center">
+				<form action="php/access.php" method="post">
+					<div class="form-box">
+						<label for = "agentID">Enter License #:</label>
+						<input class="input-field" type="text" name="agentID" required="required" placeholder="Required" >
+
+							<label for = "fname">Full Name:</label>
+							<input class="input-field" type="text" name="fname" required="required" placeholder="Required" >
+					 	
+					 		<label for = "ofcname">Office Name:</label>
+							<input class="input-field" type="text" name="ofcname"  required="required" placeholder="Required" />
+						
+							<label for = "phone">Phone Number: </label>
+							<input class="input-field" type="tel" name="phone"  required="required" placeholder="Required" />
+						
+							<label for = "email">E-mail: </label>
+							<input class="input-field" type="email" name="email"  required="required" placeholder="Required" >
+
+
+							<label for = "propertyMLS">Property MLS# </label>
+							<input class="input-field" type="text" name="propertyMLS"  required="required" placeholder="Required" >
+							<!-- <select class="js-data-example-ajax" name="address" placeholder="Required">
+							<option value="0123" selected="selected">select2/select2</option>
+							</select> -->
+
+						<input type="Submit" class="btn btn-primary center"/>
+					</div>
+				</form>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+#logo{
+
+	height: 18vh;
+	left: 30vw;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+
+
+}
+
+h1{
+	padding-bottom: 10em;
+	margin-bottom: 10em;
+}
+
+label {
+	display: block;
+	margin-bottom: 0;
+	
+
+}
+
+.input-field {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 10px 20px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+ margin-bottom: 1.5vh;
+}
+.btn-primary{
+	background-color: white;
+	display: block;
+	padding-left: : 0.9em;
+	padding-right: : 1em;
+	margin-top: 1em;
+
+}
+
+.form-box{
+	text-align: left;
+	display: block;
+	margin: 0 auto;
+}
+form {
+	width: 200px;
+	margin: 0 auto;
+}
+#rcorners2 {  
+      	border-radius: 25px;
+      	border: 2px solid #000000;
+      	padding: 20px; 
+      	width: 500px;
+      	height: 450px;  
+      	left: 50%;  
+      }
