@@ -26,11 +26,10 @@ function agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID,
 					die;
 				}
 			}
-		}else{
-					insertData($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
-					submitShowing($agentID, $p_ID, $full_name, $ofice_name, $phone, $email, $con);
+		}
+		insertData($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+		submitShowing($agentID, $p_ID, $full_name, $ofice_name, $phone, $email, $con);
 					
-				}
 	}
 
 }
