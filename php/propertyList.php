@@ -1,30 +1,21 @@
 <?php
-	//include "dbconfig.php";
+$server = "45.40.164.50";
+$login = "FSshowings";
+$password = "FSRealty7!";
+$dbname = "FSshowings";
 
-	require('dbconfig.php');
+$con=mysqli_connect($server,$login,$password,$dbname) or die ("<br> Cannot connect to DB \n");
 
-	// strip tags may not be the best method for your project to apply extra layer of security but fits needs for this tutorial 
-	$search = strip_tags(trim($_GET['q'])); 
+$search = $_GET['q'];
+$sql = "SELECT MLS, address, city, state, zipcode FROM properties
+		WHERE address LIKE  CONCAT('%','$search','%')";
 
-	// Do Prepared Query 
-	$query = $smnt->prepare("SELECT MLS,address FROM properties WHERE address LIKE :search LIMIT 40");
+$result = $con->query($sql);
 
-	// Add a wildcard search to the search variable
-	$query->execute(array(':search'=>"%".$search."%"));
+$json = [];
+while($row = $result->fetch_assoc()){
+     $json[] = ['id'=>$row['MLS'], 'text'=>$row['address']." ".$row['city'].", ".$row['state'].", ".$row['zipcode']];
+}
 
-	// Do a quick fetchall on the results
-	$list = $query->fetchall(PDO::FETCH_ASSOC);
-
-	// Make sure we have a result
-	if(count($list) > 0){
-	   foreach ($list as $key => $value) {
-	    $data[] = array('MLS' => $value['MLS'], 'text' => $value['address']);              
-	   } 
-	} else {
-	   $data[] = array('id' => '0', 'text' => 'No address found');
-	}
-
-	// return the result in json
-	echo json_encode($data);
-
+echo json_encode($json);
 ?>
