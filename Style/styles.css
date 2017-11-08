@@ -35,6 +35,7 @@ label {
   -webkit-border-radius: 3px;
   border-radius: 3px;
  margin-bottom: 1.5vh;
+ width: 200px;
 }
 .btn-primary{
 	background-color: white;
@@ -53,4 +54,20 @@ label {
 form {
 	width: 200px;
 	margin: 0 auto;
+}
+#rcorners2 {  
+      	border-radius: 25px;
+      	border: 2px solid #000000;
+      	padding: 20px; 
+      	width: 500px;
+      	height: 450px;  
+      	left: 50%;  
+      }
+.help{
+	text-align: left;
+    font-size: 18px;
+    padding-left: 20px;
+}
+.box{
+	float: left;
 }
