@@ -69,7 +69,7 @@ p{
 }
 
 .highlight{
-font-size: 22px;
+font-size: 24px;
 color: blue; 
 text-align: center;
 
@@ -92,14 +92,17 @@ text-align: center;
 
                  <?php
                  echo "<p class='highlight'> Property: ".$fullAddress."</p>";
-                 if($type=="GSMLS"){ //gsmls lockboxes
+
+
+      
+      if($type=="GSMLS"){ //gsmls lockboxes
         
         ?>
-        <div id="access_font"> 
-         <br> GSMLS LOCKBOX <br>
-         <p>Use your Supra Key <br> 
+        
+         <br> <p> <b>GSMLS LOCKBOX </b></p><br>
+         <p><i>Use your Supra Key </i></p><br> 
           <?php
-          echo "<br>Notes: ".$notes."</p";
+          echo "<p><br><b>Notes: </b> ".$notes."</p";
 
       agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 
@@ -118,12 +121,12 @@ text-align: center;
       agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 
       } else if($type=="occ"){ //occupied 
-        
-
-
-
-
-
+        ?>
+        <br><br> <p> PROPERTY IS OCCUPIED
+        <br> <i>Do not go direct! </i><br></p>
+<?php
+ echo "<p><b>Notes: </b>  ".$notes."</p>";
+ echo "<br><br><a href='#'> <p>Submit request</p> </a>";
 
       }
 
@@ -132,8 +135,9 @@ text-align: center;
 
 
     </div>
-    Hello
-    
+    <br><br>
+  <input type="Submit" class="btn btn-primary center btn-lg" value="New Request"><br>
+ 
     
 
   </center>
