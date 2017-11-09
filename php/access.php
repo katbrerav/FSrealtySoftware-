@@ -122,7 +122,7 @@ text-align: center;
 
       } else if($type=="occ"){ //occupied 
         ?>
-        <br><br> <p> PROPERTY IS OCCUPIED
+        <br><br><br> <p> PROPERTY IS OCCUPIED
         <br> <i>Do not go direct! </i><br></p>
 <?php
  echo "<p><b>Notes: </b>  ".$notes."</p>";
