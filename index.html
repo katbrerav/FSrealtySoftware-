@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head> 
-	<title> FS Realty Showing </title>
+	<title> FS Realty Showings</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,11 +30,11 @@
 
 <body>
 	<img id = "logo" src= "img/FSR_Logo.png"> 
-	<h2 class="center">Showings Request Information </h2>
+	<h2 class="center">Showings Request Information </h2><br>
 	<div class="center">
 		<form action="php/access.php" method="post">
 			<div class="form-box">
-				<label for = "agentID">Enter License #:</label>
+				<label for = "agentID">Enter NJ Realtor License #:</label>
 				<input class="input-field" type="text" name="agentID" required="required" placeholder="Required" >
 
 				<label for = "fname">Full Name:</label>
@@ -50,7 +50,7 @@
 				<input class="input-field" type="email" name="email"  required="required" placeholder="Required" >
 
 
-				<label for = "propertyMLS">Property Location </label>
+				<label for = "propertyMLS">Property Address</label>
 
 				<div class="center">
 					<select class="itemName form-control" style="width:250px" name="itemName" required="required">
@@ -58,11 +58,13 @@
 					</select>
 				</div> 
 
-				<input type="Submit" class="btn btn-primary center" value="Submit Request" />
+				<input type="Submit" class="btn btn-primary center" value="Submit Request">
+
 			</div>
 		</form>
 
 		<div class="box">
+
 			<b class="help"> Any questions or concerns?</b>
 			<p class="help"> Call (908) 445-5339 </br> showings@florostone.com</p>
 
@@ -71,7 +73,7 @@
 	<script type="text/javascript">
 		
 		$('.itemName').select2({
-			placeholder: 'Enter property address',
+			placeholder: 'Start typing property address... ',
 			ajax: {
 				url: 'PHP/propertyList.php',
 				dataType: 'json',

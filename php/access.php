@@ -6,6 +6,7 @@ From index.php - must receive Property GSMLS id & Agent ID
 //session_start();
 include 'dbconfig.php';
 include 'storeData.php';
+
 setcookie("propertyID","$p_ID",time()+(86400*30),"/");
 // Do not let user see this page if not logged in 
 //if(!isset($_SESSION['user'])){
@@ -25,46 +26,20 @@ $code= $row['combo'];
 $notes= $row['notes'];
 $location=$row['location']; 
 
-
-      function gsmlsType($address, $city, $state, $zip, $type, $code, $notes, $location){ // MEGHANA TO DO 
-
-        /*enter your code here (HTML & PHP ) to display appropriate information. NOTE- all variables have already been retrieved, just use them at your convenience 
-
-        */ 
-        echo "testing- property gsmls type"; 
-
-      }
-
-      function regularLock($address, $city, $state, $zip, $type, $code, $notes, $location){ // JAMAAL TO DO 
-
-
-          /*enter your code here (HTML & PHP ) to display appropriate information. NOTE- all variables have already been retrieved, just use them at your convenience 
-        echo "This property's lockbox combination is " .$code;
-              if($location == 'NULL'){
-                echo "The location is not specified."
-              } else {
-                echo "The location of the lockbox combination is at " .$location;
-              }
-        */ 
-             echo "testing- property regular lock  type"; 
-           }
-
-
-           function occupied($address, $city, $state, $zip, $type, $code, $notes, $location){
-
-             echo "<h3> Property is OCCUPIED </h3>"; 
-             echo "<p>Note: ". $notes."</p>";
-           } 
-
-
-
+$fullAddress= $address.",".$city.", ".$state."  ".$zip; 
 
            ?>
+
+
 
  <html>
  <head> 
    <title> FSR Showings </title>
+  
+
    <link rel="stylesheet" type="text/css" href="http://www.florostone.com/showings/Style/styles.css">
+
+   <link href="https://fonts.googleapis.com/css?family=Chewy|Goudy+Bookletter+1911" rel="stylesheet">
 
    <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -76,50 +51,95 @@ $location=$row['location'];
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
  </head>
+<style>
+h3{
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-size:30px;
+}
 
+p{
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-size: 24px;
+}
+
+.code{
+  font-family: 'Chewy', cursive;
+  font-size:60px;
+
+}
+
+.highlight{
+font-size: 24px;
+color: blue; 
+text-align: center;
+
+}
+
+
+</style>
 
 
 
            <body>
              <img id = "logo" src= "http://www.florostone.com/showings/img/FSR_Logo.png"> 
-             <br> <h2 class="center">Property Access Details  </h2>
+             <br> <h3 class="center"> Property Access Details</h3>
              <div> 
-
-
-
               <br><br>
               <center>
 
-               <div id="rcorners2"> <!-- NICE HTML/CSS DEFINED HERE -->
-
+               <div id="rcorners2" > 
 
 
                  <?php
-                 echo "<h4> Address: ".$address." ".$city." ".$state." ".$zip."</h4>";
+                 echo "<p class='highlight'> Property: ".$fullAddress."</p>";
 
 
-
+      
       if($type=="GSMLS"){ //gsmls lockboxes
-        gsmlsType($address, $city, $state, $zip, $type, $code, $notes, $location);
-        agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+        
+        ?>
+        
+         <br> <p> <b>GSMLS LOCKBOX </b></p><br>
+         <p><i>Use your Supra Key </i></p><br> 
+          <?php
+          echo "<p><br><b>Notes: </b> ".$notes."</p";
+
+      agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 
       } else if($type=="r") {//regular lockbox 
-        regularLock($address, $city, $state, $zip, $type, $code, $notes, $location);
-        agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+            ?>
+             <br><br> <p>GO DIRECT
+            <br> Regular Lockbox Code: <br>
+             </p>
+
+              <?php
+              echo "<p class='code'>".$code."</h2></p>";
+              echo "<p><b>Notes: </b>  ".$notes."</p>";
+              
+
+
+      agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 
       } else if($type=="occ"){ //occupied 
-        occupied($address, $city, $state, $zip, $type, $code, $notes, $location);
+        ?>
+        <br><br> <p> PROPERTY IS OCCUPIED
+        <br> <i>Do not go direct! </i><br></p>
+<?php
+ echo "<p><b>Notes: </b>  ".$notes."</p>";
+ echo "<br><br><a href='#'> <p>Submit request</p> </a>";
 
       }
 
 
-
-
-      ?> 
-
+?> 
 
 
     </div>
+    <br><br>
+  <input type="Submit" class="btn btn-primary center btn-lg" value="New Request"><br>
+ 
+    
+
   </center>
 
 

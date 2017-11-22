@@ -6,7 +6,8 @@ $full_name=$_POST ["fname"];
 $ofice_name=$_POST ["ofcname"];
 $phone=$_POST ["phone"];
 $email=$_POST ["email"];
-$p_ID=$_POST ["propertyMLS"];
+
+$p_ID=$_POST ["itemName"];
 
 
 function agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con){
