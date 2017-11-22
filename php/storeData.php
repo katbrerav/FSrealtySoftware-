@@ -9,6 +9,7 @@ $email=$_POST ["email"];
 $p_ID=$_POST ["itemName"];
 
 
+
 function agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con){
 
 
@@ -20,16 +21,15 @@ function agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID,
 			while($row = mysqli_fetch_array($result)){
 
 				$id = $row['id'];
-
+		
 				if($agentID == $id){
-					submitShowing($agentID, $p_ID, $full_name, $ofice_name, $phone, $email, $con);
-					die;
+				submitShowing($agentID, $p_ID, $full_name, $ofice_name, $phone, $email, $con);
+				return 0;
 				}
 			}
 		}
 		insertData($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 		submitShowing($agentID, $p_ID, $full_name, $ofice_name, $phone, $email, $con);
-					
 	}
 
 }

@@ -50,65 +50,60 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
  <img id = "logo" src= "../img/FSR_Logo.png"> 
  <h3 class="center"> Property Access Details</h3>
  <div> 
-  <br>
   <center>
-
+  <div>
    <div id="rcorners2" > 
     <?php
-    echo "<p class='highlight'> Property: ".$fullAddress."</p>";
-
-
-
+    
       if($type=="GSMLS"){ //gsmls lockboxes
 
-        ?>
-        
-        <br> <p> <b>GSMLS LOCKBOX </b></p><br>
-        <p><i>Use your Supra Key </i></p><br> 
-        <?php
-        echo "<p><br><b>Notes: </b> ".$notes."</p";
-
         agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+        echo "<br> <p> <b>GSMLS LOCKBOX </b></p><br>";
+        echo" <p><i>Use your Supra Key </i></p><br>";
+        echo "<p><br><b>Notes: </b> ".$notes."</p>";
+        
+       
 
       } else if($type=="r") {//regular lockbox 
-        ?>
-        <br><br> <p>GO DIRECT
-          <br> Regular Lockbox Code: <br>
-        </p>
-
-        <?php
+         agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+        
+        echo "<br><br> <p>GO DIRECT";
+        echo "<br> Regular Lockbox Code: <br></p>";
         echo "<p class='code'>".$code."</h2></p>";
         echo "<p><b>Notes: </b>  ".$notes."</p>";
 
+       
 
-
-        agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 
       } else if($type=="occ"){ //occupied 
-        ?>
-        <br><br> <p> PROPERTY IS OCCUPIED
-          <br> <i>Do not go direct! </i><br></p>
-          <?php
-          echo "<p><b>Notes: </b>  ".$notes."</p>";
-          echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequest'> Submit request</a></p> ";
-
-        }
-
-
-        ?> 
+    
+        echo "<br><br> <p> PROPERTY IS OCCUPIED";
+        echo"<br> <i>Do not go direct! </i><br></p>";
+        echo "<p><b>Notes: </b>  ".$notes."</p>";
+        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequest'> Submit request</a></p> ";
+     }
+     
+    ?> 
       </div>
+
       <div>
         <button type="button" class="btn btn-primary center btn-lg" data-toggle="modal" data-target="#newRequest">New Request </button>
       </div>
+
       <div class="box">
         <b class="help"> Any questions or concerns?</b>
         <p class="help"> Call (908) 445-5339 </br> showings@florostone.com</p>
       </div>
+  </div>
 
+  <?php 
+    end:
+   ?>
     </center>
 
   </div>
