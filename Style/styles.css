@@ -14,8 +14,6 @@
 	text-align: center;
 	font-family: 'Goudy Bookletter 1911', serif;
 
-
-
 }
 
 h1{
@@ -75,6 +73,37 @@ form {
 }
 .box{
 	padding-top: 20px;
-	float: center;
+	float: left;
+}
+h3{
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-size:30px;
+  text-align: center;
 }
 
+p{
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-size: 24px;
+}
+
+.code{
+  font-family: 'Chewy', cursive;
+  font-size:60px;
+
+}
+
+.highlight{
+font-size: 24px;
+color: blue; 
+text-align: center;
+
+}
+
+#rcorners2 {  
+        border-radius: 25px;
+        border: 2px solid #000000;
+        padding: 20px; 
+        width: 500px;
+        height: 450px;  
+        left: 50%;  
+      }
