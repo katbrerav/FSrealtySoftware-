@@ -34,21 +34,32 @@
 	<div class="center">
 		<form action="php/access.php" method="post">
 			<div class="form-box">
-				<label for = "agentID">Enter NJ Realtor License #:</label>
-				<input class="input-field" type="text" name="agentID" required="required" placeholder="Required" >
+				<div id="agentID" class="form-group has-feedback">
+					<label for = "agentID">Enter NJ Realtor License #:</label>
+					<input class="form-control" type="text" maxlength="7" name="agentID" id="agentID" required="required" placeholder="Required" >
+					<span id="agentID" class=""></span>
+				</div>
 
-				<label for = "fname">Full Name:</label>
-				<input class="input-field" type="text" name="fname" required="required" placeholder="Required" >
-
-				<label for = "ofcname">Office Name:</label>
-				<input class="input-field" type="text" name="ofcname"  required="required" placeholder="Required" />
-
-				<label for = "phone">Phone Number: </label>
-				<input class="input-field" type="tel" name="phone"  required="required" placeholder="(###) ###-####" />
-
-				<label for = "email">E-mail: </label>
-				<input class="input-field" type="email" name="email"  required="required" placeholder="Required" >
-
+				<div id="fname" class="form-group has-feedback">
+					<label for = "fname">Full Name:</label>
+					<input class="form-control" type="text" id="fname" name="fname" required="required" placeholder="Required" >
+					<span id="fname" class=""></span>
+				</div>
+				<div id="ofcname" class="form-group has-feedback">
+					<label for = "ofcname">Office Name:</label>
+					<input class="form-control" type="text" name="ofcname" id="ofcname" required="required" placeholder="Required" />
+					<span id="ofcname" class=""></span>
+				</div>
+				<div id="phone" class="form-group has-feedback">
+					<label for = "phone">Cell Phone Number </label>
+					<input class="form-control" type="tel" name="phone" id="phone" maxlength="11" required="required" placeholder="(###) ###-####" />
+					<span id="phone" class=""></span>
+				</div>
+				<div id="email" class="form-group has-feedback">
+					<label for = "email">E-mail: </label>
+					<input class="form-control" type="email" id="email" name="email"  required="required" placeholder="Required" >
+					<span id="email" class=""></span>
+				</div>
 
 				<label for = "propertyMLS">Property Address</label>
 
@@ -58,10 +69,12 @@
 					</select>
 				</div> 
 
-				<input type="Submit" class="btn btn-primary center" value="Submit Request">
+				<input id= "submit" type="Submit" class="btn btn-primary center" value="Submit Request">
+
 
 			</div>
 		</form>
+	
 
 		<div class="box">
 
@@ -87,6 +100,143 @@
 			}
 		});
 
+		$(document).ready(function(){
+
+		
+		var ready1 = false;
+		var ready2 = false;
+		var ready3 = false;
+		var ready4 = false;
+		var ready5 = false;
+
+		function ready() {
+			if(ready1 == true && ready2 == true && ready3 == true && ready4 == true && ready5 == true){
+		$("input#submit").prop('disabled', false);
+		}else{
+		$("input#submit").prop('disabled', true);
+		}
+	}
+		
+    $('input#agentID').on('keyup keypress blur focus',function(){
+        var agentID = $('input#agentID').val(); 
+
+
+        if(isNaN(agentID)){
+           $('div#agentID').attr('class', 'form-group has-error has-feedback');
+            $('span#agentID').attr('class', 'glyphicon glyphicon-remove form-control-feedback');
+          	ready1 = false;
+          	ready();
+        }
+        if(!isNaN(agentID)){
+           $('div#agentID').attr('class', 'form-group has-success has-feedback');
+            $('span#agentID').attr('class', 'glyphicon glyphicon-ok form-control-feedback');
+            ready1 = true;
+            ready();
+        }
+        if(agentID.length < 7){
+           $('div#agentID').attr('class', 'form-group has-warning has-feedback');
+            $('span#agentID').attr('class', 'glyphicon glyphicon-warning-sign form-control-feedback');
+           ready1 = false;
+           ready();
+        }
+        console.log(agentID);
+    });
+    $("input#fname").on('keyup keypress blur focus',function(){
+        var fname = $('input#fname').val(); 
+
+        if(!isNaN(fname)){
+           $('div#fname').attr('class', 'form-group has-error has-feedback');
+            $('span#fname').attr('class', 'glyphicon glyphicon-remove form-control-feedback');
+            ready2= false;
+            ready();
+        }
+        if(fname.length > 4){
+           $('div#fname').attr('class', 'form-group has-success has-feedback');
+            $('span#fname').attr('class', 'glyphicon glyphicon-ok form-control-feedback');
+           ready2= true;
+           ready();
+        }
+        if(fname.length < 4){
+           $('div#fname').attr('class', 'form-group has-warning has-feedback');
+            $('span#fname').attr('class', 'glyphicon glyphicon-warning-sign form-control-feedback');
+            ready2= false;
+            ready();
+        }
+        console.log(fname);
+    });
+    $("input#ofcname").on('keyup keypress blur focus',function(){
+        var ofcname = $('input#ofcname').val(); 
+
+        if(!isNaN(ofcname)){
+           $('div#ofcname').attr('class', 'form-group has-error has-feedback');
+            $('span#ofcname').attr('class', 'glyphicon glyphicon-remove form-control-feedback');
+            ready3= false;
+            ready();
+        }
+        if(ofcname.length > 4){
+           $('div#ofcname').attr('class', 'form-group has-success has-feedback');
+            $('span#ofcname').attr('class', 'glyphicon glyphicon-ok form-control-feedback');
+            ready3= true;
+            ready();
+        }
+        if(ofcname.length < 4){
+           $('div#ofcname').attr('class', 'form-group has-warning has-feedback');
+            $('span#ofcname').attr('class', 'glyphicon glyphicon-warning-sign form-control-feedback');
+            ready3= false;
+            ready();
+        }
+        console.log(ofcname);
+    });
+     $("input#phone").on('keyup keypress blur focus',function(){
+        var phone = $('input#phone').val(); 
+
+        if(isNaN(phone)){
+           $('div#phone').attr('class', 'form-group has-error has-feedback');
+            $('span#phone').attr('class', 'glyphicon glyphicon-remove form-control-feedback');
+           ready4= false;
+            ready();
+        }
+        if(!isNaN(phone)){
+           $('div#phone').attr('class', 'form-group has-success has-feedback');
+            $('span#phone').attr('class', 'glyphicon glyphicon-ok form-control-feedback');
+           ready4= true;
+            ready();
+        }
+        if(phone.length < 10){
+           $('div#phone').attr('class', 'form-group has-warning has-feedback');
+            $('span#phone').attr('class', 'glyphicon glyphicon-warning-sign form-control-feedback');
+            ready4= false;
+            ready();
+        }
+        console.log(phone);
+    });
+
+      $("input#email").on('keyup keypress blur focus',function(){
+        var email = $('input#email').val(); 
+
+        function isEmail(email) {
+       var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+       return regex.test(email);
+          }
+        if(!isEmail(email)){
+           $('div#email').attr('class', 'form-group has-error has-feedback');
+            $('span#email').attr('class', 'glyphicon glyphicon-remove form-control-feedback');
+           ready5= false;
+            ready();
+        }
+        if(isEmail(email)){
+           $('div#email').attr('class', 'form-group has-success has-feedback');
+            $('span#email').attr('class', 'glyphicon glyphicon-ok form-control-feedback');
+           ready5= true;
+            ready();
+        }
+        console.log(email);
+    });
+});
+
+
+       
+ 
 	</script>
 
 </body>

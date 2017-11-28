@@ -28,124 +28,156 @@ $location=$row['location'];
 
 $fullAddress= $address.",".$city.", ".$state."  ".$zip; 
 
-           ?>
+?>
+
+<html>
+<head> 
+ <title> FSR Showings </title>
 
 
+ <link rel="stylesheet" type="text/css" href="../Style/styles.css">
 
- <html>
- <head> 
-   <title> FSR Showings </title>
-  
+ <link href="https://fonts.googleapis.com/css?family=Chewy|Goudy+Bookletter+1911" rel="stylesheet">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-   <link rel="stylesheet" type="text/css" href="http://www.florostone.com/showings/Style/styles.css">
+ <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-   <link href="https://fonts.googleapis.com/css?family=Chewy|Goudy+Bookletter+1911" rel="stylesheet">
+ <!-- Optional theme -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-   <!-- Latest compiled and minified CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ <!-- Latest compiled and minified JavaScript -->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-   <!-- Optional theme -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
 
-   <!-- Latest compiled and minified JavaScript -->
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
- </head>
-<style>
-h3{
-  font-family: 'Goudy Bookletter 1911', serif;
-  font-size:30px;
-}
-
-p{
-  font-family: 'Goudy Bookletter 1911', serif;
-  font-size: 24px;
-}
-
-.code{
-  font-family: 'Chewy', cursive;
-  font-size:60px;
-
-}
-
-.highlight{
-font-size: 24px;
-color: blue; 
-text-align: center;
-
-}
-
-
-</style>
-
-
-
-           <body>
-             <img id = "logo" src= "http://www.florostone.com/showings/img/FSR_Logo.png"> 
-             <br> <h3 class="center"> Property Access Details</h3>
-             <div> 
-              <br><br>
-              <center>
-
-               <div id="rcorners2" > 
-
-
-                 <?php
-                 echo "<p class='highlight'> Property: ".$fullAddress."</p>";
-
-
-      
+<body>
+ <img id = "logo" src= "../img/FSR_Logo.png"> 
+ <h3 class="center"> Property Access Details</h3>
+ <div> 
+  <center>
+  <div>
+   <div id="rcorners2" > 
+    <?php
+    
       if($type=="GSMLS"){ //gsmls lockboxes
-        
-        ?>
-        
-         <br> <p> <b>GSMLS LOCKBOX </b></p><br>
-         <p><i>Use your Supra Key </i></p><br> 
-          <?php
-          echo "<p><br><b>Notes: </b> ".$notes."</p";
 
-      agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+        agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+        echo "<br> <p> <b>GSMLS LOCKBOX </b></p><br>";
+        echo" <p><i>Use your Supra Key </i></p><br>";
+        echo "<p><br><b>Notes: </b> ".$notes."</p>";
+        
+       
 
       } else if($type=="r") {//regular lockbox 
-            ?>
-             <br><br> <p>GO DIRECT
-            <br> Regular Lockbox Code: <br>
-             </p>
+         agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+        
+        echo "<br><br> <p>GO DIRECT";
+        echo "<br> Regular Lockbox Code: <br></p>";
+        echo "<p class='code'>".$code."</h2></p>";
+        echo "<p><b>Notes: </b>  ".$notes."</p>";
 
-              <?php
-              echo "<p class='code'>".$code."</h2></p>";
-              echo "<p><b>Notes: </b>  ".$notes."</p>";
-              
+       
 
-
-      agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
 
       } else if($type=="occ"){ //occupied 
+<<<<<<< HEAD
         ?>
         <br><br><br> <p> PROPERTY IS OCCUPIED
         <br> <i>Do not go direct! </i><br></p>
 <?php
  echo "<p><b>Notes: </b>  ".$notes."</p>";
  echo "<br><br><a href='#'> <p>Submit request</p> </a>";
+=======
+    
+        echo "<br><br> <p> PROPERTY IS OCCUPIED";
+        echo"<br> <i>Do not go direct! </i><br></p>";
+        echo "<p><b>Notes: </b>  ".$notes."</p>";
+        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequest'> Submit request</a></p> ";
+     }
+     
+    ?> 
+      </div>
 
-      }
+      <div>
+        <button type="button" class="btn btn-primary center btn-lg" data-toggle="modal" data-target="#newRequest">New Request </button>
+      </div>
 
+      <div class="box">
+        <b class="help"> Any questions or concerns?</b>
+        <p class="help"> Call (908) 445-5339 </br> showings@florostone.com</p>
+      </div>
+  </div>
 
-?> 
+  <?php 
+    end:
+   ?>
+    </center>
 
+  </div>
+
+  <!-- New Request Window -->
+<div class="modal fade" id="newRequest">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"> New Showing Request</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <?php 
+
+        echo $full_name;
+
+         ?>
+        Form will go here
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+>>>>>>> 82293d7f21c90472ff6cc635ee7d5b01e292da5c
 
     </div>
-    <br><br>
-  <input type="Submit" class="btn btn-primary center btn-lg" value="New Request"><br>
- 
-    
-
-  </center>
-
-
-
+  </div>
 </div>
 
+<!-- Occupied Window -->
+<div class="modal fade" id="occupiedRequest">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"> Occupied Request</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <?php 
+
+        echo $full_name;
+
+         ?>
+        Form will go here
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
