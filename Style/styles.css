@@ -1,3 +1,5 @@
+
+
 #logo{
 
 	height: 18vh;
@@ -10,13 +12,15 @@
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
+	font-family: 'Goudy Bookletter 1911', serif;
 
 
 }
 
 h1{
 	padding-bottom: 10em;
-	margin-bottom: 10em;
+	margin-bottom: 8em;
+
 }
 
 label {
@@ -26,16 +30,17 @@ label {
 
 }
 
-.input-field {
+
+.form-control {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  padding: 10px 20px;
+  
+  padding: 2px 5px;
   border: 1px solid #b7b7b7;
-  -webkit-border-radius: 3px;
+  -webkit-border-radius: 0.5px;
   border-radius: 3px;
- margin-bottom: 1.5vh;
  width: 200px;
+ margin-bottom: -1%;
 }
 .btn-primary{
 	background-color: white;
@@ -52,8 +57,9 @@ label {
 	margin: 0 auto;
 }
 form {
-	width: 200px;
+	width: 250px;
 	margin: 0 auto;
+    margin-top: -1.5%;
 }
 #rcorners2 {  
       	border-radius: 25px;
@@ -64,10 +70,48 @@ form {
       	left: 50%;  
       }
 .help{
-	text-align: left;
-    font-size: 18px;
+	text-align: center;
+    font-size: 14px;
     padding-left: 20px;
 }
 .box{
+	padding-top: 20px;
 	float: left;
+}
+h3{
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-size:30px;
+  text-align: center;
+}
+
+p{
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-size: 24px;
+}
+
+.code{
+  font-family: 'Chewy', cursive;
+  font-size:60px;
+
+}
+
+.highlight{
+font-size: 24px;
+color: blue; 
+text-align: center;
+
+}
+
+#rcorners2 {  
+        border-radius: 25px;
+        border: 2px solid #000000;
+        padding: 20px; 
+        width: 500px;
+        height: 450px;  
+        left: 50%;  
+      }
+.glyphicon{
+	position: absolute;
+	text-align: right;
+	left: 100%;
 }

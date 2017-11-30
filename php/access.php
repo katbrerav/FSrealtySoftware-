@@ -29,7 +29,6 @@ $location=$row['location'];
 $fullAddress= $address.",".$city.", ".$state."  ".$zip; 
 
 ?>
-
 <html>
 <head> 
  <title> FSR Showings </title>
@@ -226,7 +225,6 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
         Form will go here
 
       </div>
-
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -237,6 +235,5 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
 </div>
 
 </body>
-
 
 </html>
