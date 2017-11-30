@@ -1,4 +1,6 @@
 <?php
+
+require 'PHPMailer/PHPMailerAutoload.php';
 include "dbconfig.php";
 
 $agentID=$_POST ["agentID"];
@@ -88,22 +90,56 @@ function sendEmail($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $co
 	$notes= $row['notes'];
 	$location=$row['location']; 
 
-	// email to showings@florostone.com
-	$to = 'ajgb1904@gmail.com'; // Add your showings email address inbetween the '' This is where the form will send a message to.
-	$email_subject = "Agent ".$full_name . " requested a showing for property " .$p_ID;
-	$email_body = "Agent ".$full_name ." requested a showing for property located at: \n\n".$address." ".$city." ".$state." ".$zip."\n\nHere are the details:\n\nAgent Name: $full_name\n\nLicense #: $agentID\n\nOffice Name: $ofice_name\n\nEmail: $email\n\nPhone: $phone\n\n";
+$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+try {
+    //Server settings                                   // TCP port to connect to
 
-	$headers = "From: submission@florostone.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
-	$headers .= "Reply-To: $email";	
-	mail($to,$email_subject,$email_body,$headers);
+   $mail->isSMTP();
+	$mail->Host = 'relay-hosting.secureserver.net';
+	$mail->Port = 25;
+	$mail->SMTPAuth = false;
+	$mail->SMTPSecure = false;
 
+    //Recipients
+    $mail->setFrom('showings@florostone.com', 'Showings FloroStone');
+    $mail->addAddress($email, 'User');     // Add a recipient
+    $mail->addReplyTo('showings@florostone.com', 'Showings FloroStone');
 
-	//email to agent email address
-	$reply_Subject = "You have submitted a showing request for property ".$p_ID;
-	$reply_Body = "Hello ".$full_name."!\n\nHere are the details from your recent request: \n\nProperty Address: ".$address." ".$city." ".$state." ".$zip."\n\nLockbox location: $location\n\nNotes: $notes\n\nCombination (if applicable): $code\n\n\n After reviewing the property, please give feedback to showings@florostone.com";
-	$reply_headers = "From: showings@florostone.com\n";
-	mail($email,$reply_Subject,$reply_Body,$reply_headers);
-	return true;			
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = "You have submitted a showing request for property ".$p_ID;
+    $mail->Body    = "Hello ".$full_name.", <br/><br/>Here are the details from your recent request:<br/><br/> <b>Property Address:</b> ".$address." ".$city." ".$state." ".$zip."<br/><br/><b>Lockbox location:</b> $location<br/><br/><b>Notes: </b> $notes<br/><br/><b>Combination (if applicable)</b></b>: $code<br/><br/><br/> After reviewing the property, please give feedback to showings@florostone.com";
+    $mail->send();
+
+    echo 'You have received an email with the property details.';
+} catch (Exception $e) {
+    echo 'Oops, we were unable to send you an email with property details. Please email us at showings@florostone.com';
+}	
+
+$mail = new PHPMailer(true);  
+try {
+    //Server settings                                   // TCP port to connect to
+
+   $mail->isSMTP();
+	$mail->Host = 'relay-hosting.secureserver.net';
+	$mail->Port = 25;
+	$mail->SMTPAuth = false;
+	$mail->SMTPSecure = false;
+
+    //Recipients
+    $mail->setFrom('submissions@florostone.com', 'Showings Submissions');
+    $mail->addAddress('argonzal@kean.edu', 'User');     // Add a recipient
+    $mail->addReplyTo($email, $full_name);
+
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = "Agent ".$full_name . " requested a showing for property " .$p_ID;
+    $mail->Body    = "Agent ".$full_name ." requested a showing for property located at: <b><br/><br/>".$address." ".$city." ".$state." ".$zip."</b><br/><br/>Here are the details:<br/><br/><b>Agent Name:</b> $full_name<br/><br/><b>License #:</b> $agentID<br/><br/><b>Office Name:</b>$ofice_name<br/><br/><b>Email:</b> $email<br/><br/><b>Phone: </b>$phone<br/><br/>";;
+    $mail->send();
+
+} catch (Exception $e) {
+    echo 'Oops, we were unable to send you an email with property details. Please email us at showings@florostone.com';
+}	
 }
 
 ?>

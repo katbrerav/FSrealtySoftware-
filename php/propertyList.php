@@ -8,14 +8,15 @@ $con=mysqli_connect($server,$login,$password,$dbname) or die ("<br> Cannot conne
 
 $search = $_GET['q'];
 $sql = "SELECT MLS, address, city, state, zipcode FROM properties
-		WHERE address LIKE  CONCAT('%','$search','%')";
+        WHERE address LIKE  CONCAT('%','$search','%')";
 
 $result = $con->query($sql);
 
-$json = [];
+$json = array();
 while($row = $result->fetch_assoc()){
-     $json[] = ['id'=>$row['MLS'], 'text'=>$row['address']." ".$row['city'].", ".$row['state'].", ".$row['zipcode']];
+     $json[] = array('id'=>$row['MLS'], 'text'=>$row['address']." ".$row['city'].", ".$row['state'].", ".$row['zipcode']);
 }
 
+header("Content-type:application/json");
 echo json_encode($json);
 ?>

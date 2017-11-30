@@ -87,8 +87,9 @@
 		
 		$('.itemName').select2({
 			placeholder: 'Start typing property address... ',
+      minimumInputLength: 2,
 			ajax: {
-				url: 'PHP/propertyList.php',
+				url: 'php/propertyList.php',
 				dataType: 'json',
 				delay: 250,
 				processResults: function (data) {
