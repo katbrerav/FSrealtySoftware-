@@ -29,7 +29,6 @@ $location=$row['location'];
 $fullAddress= $address.",".$city.", ".$state."  ".$zip; 
 
 ?>
-
 <html>
 <head> 
  <title> FSR Showings </title>
@@ -48,7 +47,8 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
 
  <!-- Latest compiled and minified JavaScript -->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -121,23 +121,88 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
 
       <!-- Modal body -->
       <div class="modal-body">
-        <?php 
+       
+        
+        <div class="center">
+        <form action="access.php" method="post">
+          
+        <div class="form-box">
+            <div id="agentID" class="form-group has-feedback">
+              <label for = "agentID">Enter NJ Realtor License #:</label>
+              <input class="form-control" type="text" maxlength="7" name="agentID" id="$agentID" required="required" value='<?php echo $agentID; ?>' readonly="readonly">
+              <span id="agentID" class=""></span>
+            </div>
+    
+            <div id="fname" class="form-group has-feedback">
+              <label for = "fname">Full Name:</label>
+              <input class="form-control" type="text" id="$full_name" name="fname" required="required" value='<?php echo $full_name; ?>' readonly="readonly">
+              <span id="fname" class=""></span>
+            </div>
+            
+            <div id="ofcname" class="form-group has-feedback">
+					<label for = "ofcname">Office Name:</label>
+					<input class="form-control" type="text" name="ofcname" id="ofcname" required="required"  value='<?php echo $ofice_name; ?>' readonly="readonly"/>
+					<span id="ofcname" class=""></span>
+				</div>
+				<div id="phone" class="form-group has-feedback">
+					<label for = "phone">Cell Phone Number </label>
+					<input class="form-control" type="tel" name="phone" id="phone" maxlength="11" required="required"  value='<?php echo $phone; ?>' readonly="readonly"/>
+					<span id="phone" class=""></span>
+				</div>
+				<div id="email" class="form-group has-feedback">
+					<label for = "email">E-mail: </label>
+					<input class="form-control" type="email" id="email" name="email"  required="required"  value='<?php echo $email; ?>' readonly="readonly">
+					<span id="email" class=""></span>
+				</div>
+    
+            <label for = "propertyMLS">Property Address</label>
+            
+                    <div class="center">
+                      <select class="itemName form-control" style="width:250px" name="itemName" required="required">
+                        <option class="itemName"> </option>
+                      </select>
+                    </div> 
+    
+          </div>
 
-        echo $full_name;
 
-         ?>
-        Form will go here
-
-      </div>
-
-      <!-- Modal footer -->
+          <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <div class="box">
+      
+      <input id= "submit" type="Submit" class="btn btn-primary center" value="Submit New Request"><br />
+      <div class="center">
+      <b class="help"> Any questions or concerns?</b>
+			<p class="help"> Call (908) 445-5339 </br> showings@florostone.com</p>
+    </div>
+		</div>
       </div>
 
-    </div>
+     
+        </form>
+        
   </div>
+ 
 </div>
+
+          
+<script type="text/javascript">
+		
+		$('.itemName').select2({
+			placeholder: 'Start typing property address... ',
+			ajax: {
+				url: 'propertyList.php',
+				dataType: 'json',
+				delay: 250,
+				processResults: function (data) {
+					return {
+						results: data
+					};
+				},
+				cache: true
+			}
+		});
+</script>
 
 <!-- Occupied Window -->
 <div class="modal fade" id="occupiedRequest">
@@ -160,7 +225,6 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
         Form will go here
 
       </div>
-
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -171,4 +235,5 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
 </div>
 
 </body>
+
 </html>
