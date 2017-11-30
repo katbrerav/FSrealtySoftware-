@@ -8,7 +8,7 @@ $con=mysqli_connect($server,$login,$password,$dbname) or die ("<br> Cannot conne
 
 $search = $_GET['q'];
 $sql = "SELECT MLS, address, city, state, zipcode FROM properties
-        WHERE address LIKE  CONCAT('%','$search','%')";
+		WHERE address LIKE  CONCAT('%','$search','%') OR city LIKE CONCAT('%','$search','%') OR state LIKE CONCAT('%','$search','%') OR zipcode LIKE CONCAT('%','$search','%')";
 
 $result = $con->query($sql);
 
