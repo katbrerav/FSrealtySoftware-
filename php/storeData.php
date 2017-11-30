@@ -128,7 +128,7 @@ try {
 
     //Recipients
     $mail->setFrom('submissions@florostone.com', 'Showings Submissions');
-    $mail->addAddress('argonzal@kean.edu', 'User');     // Add a recipient
+    $mail->addAddress('showings@florostone.com', 'User');     // Add a recipient
     $mail->addReplyTo($email, $full_name);
 
     //Content
