@@ -107,7 +107,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = "You have submitted a showing request for property ".$p_ID;
+    $mail->Subject = "SHOWING REQUEST ".$address." ".$city." ".$state." ".$zip;
     $mail->Body    = "Hello ".$full_name.", <br/><br/>Here are the details from your recent request:<br/><br/> <b>Property Address:</b> ".$address." ".$city." ".$state." ".$zip."<br/><br/><b>Lockbox location:</b> $location<br/><br/><b>Notes: </b> $notes<br/><br/><b>Combination (if applicable)</b></b>: $code<br/><br/><br/> After reviewing the property, please give feedback to showings@florostone.com";
     $mail->send();
 
