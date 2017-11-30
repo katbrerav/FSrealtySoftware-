@@ -3,15 +3,15 @@
 From index.php - must receive Property GSMLS id & Agent ID 
 
 **/
-//session_start();
+session_start();
 include 'dbconfig.php';
 include 'storeData.php';
 
 setcookie("propertyID","$p_ID",time()+(86400*30),"/");
-// Do not let user see this page if not logged in 
-//if(!isset($_SESSION['user'])){
-  //header("Location: index.php"); 
-//// query gets all the property related info given the property MLS id 
+
+
+
+// query gets all the property related info given the property MLS id 
 $query= "SELECT * FROM properties join propertyAccess on properties.MLS=propertyAccess.MLS WHERE properties.MLS = $p_ID ";
 
 $result = mysqli_query($con, $query);
@@ -60,6 +60,8 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
    <div id="rcorners2" > 
     <?php
     
+    echo "<p class='highlight'> Property: ".$fullAddress."</p>";
+
       if($type=="GSMLS"){ //gsmls lockboxes
 
         agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
@@ -85,7 +87,7 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
         echo "<br><br> <p> PROPERTY IS OCCUPIED";
         echo"<br> <i>Do not go direct! </i><br></p>";
         echo "<p><b>Notes: </b>  ".$notes."</p>";
-        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequest'> Submit request</a></p> ";
+        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequests'> Submit request</a></p> ";
      }
      
     ?> 
@@ -111,85 +113,95 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
   <!-- New Request Window -->
 <div class="modal fade" id="newRequest">
   <div class="modal-dialog">
+
+    <!-- Modal content-->
     <div class="modal-content">
-
-      <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title"> New Showing Request</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Showing Request</h4>
       </div>
-
-      <!-- Modal body -->
       <div class="modal-body">
-       
         
-        <div class="center">
         <form action="access.php" method="post">
-          
-        <div class="form-box">
+
+          <div class="form-box">
             <div id="agentID" class="form-group has-feedback">
               <label for = "agentID">Enter NJ Realtor License #:</label>
               <input class="form-control" type="text" maxlength="7" name="agentID" id="$agentID" required="required" value='<?php echo $agentID; ?>' readonly="readonly">
               <span id="agentID" class=""></span>
             </div>
-    
+            
             <div id="fname" class="form-group has-feedback">
               <label for = "fname">Full Name:</label>
               <input class="form-control" type="text" id="$full_name" name="fname" required="required" value='<?php echo $full_name; ?>' readonly="readonly">
               <span id="fname" class=""></span>
             </div>
-            
+
             <div id="ofcname" class="form-group has-feedback">
-					<label for = "ofcname">Office Name:</label>
-					<input class="form-control" type="text" name="ofcname" id="ofcname" required="required"  value='<?php echo $ofice_name; ?>' readonly="readonly"/>
-					<span id="ofcname" class=""></span>
-				</div>
-				<div id="phone" class="form-group has-feedback">
-					<label for = "phone">Cell Phone Number </label>
-					<input class="form-control" type="tel" name="phone" id="phone" maxlength="11" required="required"  value='<?php echo $phone; ?>' readonly="readonly"/>
-					<span id="phone" class=""></span>
-				</div>
-				<div id="email" class="form-group has-feedback">
-					<label for = "email">E-mail: </label>
-					<input class="form-control" type="email" id="email" name="email"  required="required"  value='<?php echo $email; ?>' readonly="readonly">
-					<span id="email" class=""></span>
-				</div>
-    
-            <label for = "propertyMLS">Property Address</label>
-            
-                    <div class="center">
-                      <select class="itemName form-control" style="width:250px" name="itemName" required="required">
-                        <option class="itemName"> </option>
-                      </select>
-                    </div> 
-    
-          </div>
+             <label for = "ofcname">Office Name:</label>
+             <input class="form-control" type="text" name="ofcname" id="ofcname" required="required"  value='<?php echo $ofice_name; ?>' readonly="readonly"/>
+             <span id="ofcname" class=""></span>
+           </div>
+           <div id="phone" class="form-group has-feedback">
+             <label for = "phone">Cell Phone Number </label>
+             <input class="form-control" type="tel" name="phone" id="phone" maxlength="11" required="required"  value='<?php echo $phone; ?>' readonly="readonly"/>
+             <span id="phone" class=""></span>
+           </div>
+           <div id="email" class="form-group has-feedback">
+             <label for = "email">E-mail: </label>
+             <input class="form-control" type="email" id="email" name="email"  required="required"  value='<?php echo $email; ?>' readonly="readonly">
+             <span id="email" class=""></span>
+           </div>
 
+           <label for = "propertyMLS">Property Address</label>
 
-          <!-- Modal footer -->
-      <div class="modal-footer">
-      <div class="box">
-      
-      <input id= "submit" type="Submit" class="btn btn-primary center" value="Submit New Request"><br />
-      <div class="center">
-      <b class="help"> Any questions or concerns?</b>
-			<p class="help"> Call (908) 445-5339 </br> showings@florostone.com</p>
-    </div>
-		</div>
+           <div class="center">
+            <select class="itemName form-control" style="width:250px" name="itemName" required="required">
+              <option class="itemName"> </option>
+            </select>
+          </div> 
+
+        </div>
+        <center>
+        <input id= "submit" type="Submit" class="btn btn-primary center" value="Submit New Request"><br />
+      </center>
+        </form>   
+
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 
-     
-        </form>
-        
   </div>
- 
 </div>
+    
+</div>
+<!-- Modal -->
+<div id="occupiedRequests" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-          
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <script type="text/javascript">
 		
 		$('.itemName').select2({
 			placeholder: 'Start typing property address... ',
+      minimumInputLength: 2,
 			ajax: {
 				url: 'propertyList.php',
 				dataType: 'json',
@@ -204,35 +216,6 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
 		});
 </script>
 
-<!-- Occupied Window -->
-<div class="modal fade" id="occupiedRequest">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title"> Occupied Request</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <?php 
-
-        echo $full_name;
-
-         ?>
-        Form will go here
-
-      </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 </body>
 
