@@ -11,6 +11,9 @@ $email=$_POST ["email"];
 $p_ID=$_POST ["itemName"];
 
 
+if(!$agentID){
+  header("Location: ../index.html");
+  } 
 
 function agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con){
 
@@ -107,7 +110,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = "SHOWING REQUEST - ".$address." ".$city." ".$state." ".$zip. " (MLS# ".$MLS.")";
+    $mail->Subject = "SHOWING REQUEST - ".$address." ".$city." ".$state." ".$zip. " (MLS# ".$p_ID.")";
     $mail->Body    = "Hello ".$full_name.", <br/><br/>Here are the details from your recent request:<br/><br/> <b>Property Address:</b> ".$address." ".$city." ".$state." ".$zip."<br/><br/><b>Lockbox location:</b> $location<br/><br/><b>Notes: </b> $notes<br/><br/><b>Combination (if applicable)</b></b>: $code<br/><br/><br/> After reviewing the property, please give feedback to showings@florostone.com";
     $mail->send();
 
@@ -127,18 +130,18 @@ try {
 	$mail->SMTPSecure = false;
 
     //Recipients
-    $mail->setFrom('submissions@florostone.com', 'Showings Submissions');
+    $mail->setFrom('no-reply@florostone.com', 'Showings Submissions');
     $mail->addAddress('showings@florostone.com', 'User');     // Add a recipient
     $mail->addReplyTo($email, $full_name);
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = "SHOWING REQUEST - ".$address." ".$city." ".$state." ".$zip." (MLS# ".$MLS.")";
+    $mail->Subject = "SHOWING REQUEST - ".$address." ".$city." ".$state." ".$zip." (MLS# ".$p_ID.")";
     $mail->Body    = "Agent ".$full_name ." requested a showing for property located at: <b><br/><br/>".$address." ".$city." ".$state." ".$zip."</b><br/><br/>Here are the details:<br/><br/><b>Agent Name:</b> $full_name<br/><br/><b>License #:</b> $agentID<br/><br/><b>Office Name:</b>$ofice_name<br/><br/><b>Email:</b> $email<br/><br/><b>Phone: </b>$phone<br/><br/>";;
     $mail->send();
 
 } catch (Exception $e) {
-    echo 'Oops, we were unable to send you an email with property details. Please email us at showings@florostone.com';
+    echo 'Email Not Sent.';
 }	
 }
 
