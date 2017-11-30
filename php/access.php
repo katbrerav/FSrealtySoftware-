@@ -8,6 +8,8 @@ include 'dbconfig.php';
 include 'storeData.php';
 
 setcookie("propertyID","$p_ID",time()+(86400*30),"/");
+
+
 // Do not let user see this page if not logged in 
 //if(!isset($_SESSION['user'])){
   //header("Location: index.php"); 
@@ -27,9 +29,18 @@ $notes= $row['notes'];
 $location=$row['location']; 
 
 $fullAddress= $address.",".$city.", ".$state."  ".$zip; 
+$full_name="Katerine";
+/*$type="occ";
+$agentID="123456";
+
+$ofice_name="Floro";
+$phone="9087649301";
+$email-"cabrerka@kean.edu";
+$p_ID=3430390;
+$notes=" Tenants preferred times: Weekdays after 5pm.";
+$fullAddress="114 Franklin St, Elizabeth NJ 07206";*/
 
 ?>
-
 <html>
 <head> 
  <title> FSR Showings </title>
@@ -48,7 +59,8 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
 
  <!-- Latest compiled and minified JavaScript -->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -60,6 +72,8 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
    <div id="rcorners2" > 
     <?php
     
+    echo "<p class='highlight'> Property: ".$fullAddress."</p>";
+
       if($type=="GSMLS"){ //gsmls lockboxes
 
         agentRequests($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
@@ -81,19 +95,11 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
 
 
       } else if($type=="occ"){ //occupied 
-<<<<<<< HEAD
-        ?>
-        <br><br><br> <p> PROPERTY IS OCCUPIED
-        <br> <i>Do not go direct! </i><br></p>
-<?php
- echo "<p><b>Notes: </b>  ".$notes."</p>";
- echo "<br><br><a href='#'> <p>Submit request</p> </a>";
-=======
     
         echo "<br><br> <p> PROPERTY IS OCCUPIED";
         echo"<br> <i>Do not go direct! </i><br></p>";
         echo "<p><b>Notes: </b>  ".$notes."</p>";
-        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequest'> Submit request</a></p> ";
+        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequests'> Submit request</a></p> ";
      }
      
     ?> 
@@ -119,65 +125,139 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
   <!-- New Request Window -->
 <div class="modal fade" id="newRequest">
   <div class="modal-dialog">
+
+    <!-- Modal content-->
     <div class="modal-content">
-
-      <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title"> New Showing Request</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Showing Request</h4>
       </div>
-
-      <!-- Modal body -->
       <div class="modal-body">
-        <?php 
+        
+        <form action="access.php" method="post">
 
-        echo $full_name;
+          <div class="form-box">
+            <div id="agentID" class="form-group has-feedback">
+              <label for = "agentID">Enter NJ Realtor License #:</label>
+              <input class="form-control" type="text" maxlength="7" name="agentID" id="$agentID" required="required" value='<?php echo $agentID; ?>' readonly="readonly">
+              <span id="agentID" class=""></span>
+            </div>
+            
+            <div id="fname" class="form-group has-feedback">
+              <label for = "fname">Full Name:</label>
+              <input class="form-control" type="text" id="$full_name" name="fname" required="required" value='<?php echo $full_name; ?>' readonly="readonly">
+              <span id="fname" class=""></span>
+            </div>
 
-         ?>
-        Form will go here
+            <div id="ofcname" class="form-group has-feedback">
+             <label for = "ofcname">Office Name:</label>
+             <input class="form-control" type="text" name="ofcname" id="ofcname" required="required"  value='<?php echo $ofice_name; ?>' readonly="readonly"/>
+             <span id="ofcname" class=""></span>
+           </div>
+           <div id="phone" class="form-group has-feedback">
+             <label for = "phone">Cell Phone Number </label>
+             <input class="form-control" type="tel" name="phone" id="phone" maxlength="11" required="required"  value='<?php echo $phone; ?>' readonly="readonly"/>
+             <span id="phone" class=""></span>
+           </div>
+           <div id="email" class="form-group has-feedback">
+             <label for = "email">E-mail: </label>
+             <input class="form-control" type="email" id="email" name="email"  required="required"  value='<?php echo $email; ?>' readonly="readonly">
+             <span id="email" class=""></span>
+           </div>
+
+           <label for = "propertyMLS">Property Address</label>
+
+           <div class="center">
+            <select class="itemName form-control" style="width:250px" name="itemName" required="required">
+              <option class="itemName"> </option>
+            </select>
+          </div> 
+
+        </div>
+
+
+        <center>
+        <input id= "submit" type="Submit" class="btn btn-primary center" value="Submit New Request"><br />
+      </center>
+        </form>   
 
       </div>
-
-      <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
->>>>>>> 82293d7f21c90472ff6cc635ee7d5b01e292da5c
-
     </div>
+
   </div>
 </div>
+    
+</div>
 
-<!-- Occupied Window -->
-<div class="modal fade" id="occupiedRequest">
+
+
+<!-- Modal -->
+<div id="occupiedRequests" class="modal fade" >
   <div class="modal-dialog">
+
+    <!-- Modal content-->
     <div class="modal-content">
-
-      <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title"> Occupied Request</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Showing Request</h4>
       </div>
 
-      <!-- Modal body -->
+       <p> 
       <div class="modal-body">
-        <?php 
+        <?php
+echo "Dear ".$full_name.",<br>"."Please enter up to two days and times that you will like to show the property.<br>"." <br>For easier showing, choose time slots from the tenant's preferred times.";
+echo " Someone from our office will contact you shortly to the e-mail or phone provided.<br> Thank You! We appreciate your feedback!";
 
-        echo $full_name;
 
-         ?>
-        Form will go here
 
+
+        ?>
+        <form action="access.php" method="post"><br><br>
+          <center>
+          <div class="form-box">
+       
+        
+          <div id="comment" class="form-group has-feedback">
+         
+          <input class="form-control" type="text" id="fname" name="fname" required="required" placeholder="Enter day and time" >
+          <span id="fname" class=""></span>
+        </div>
+
+
+    
       </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-
+    </center>
     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    
+
   </div>
-</div>
+
+<script type="text/javascript">
+    
+    $('.itemName').select2({
+      placeholder: 'Start typing property address... ',
+      minimumInputLength: 2,
+      ajax: {
+        url: 'propertyList.php',
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data) {
+          return {
+            results: data
+          };
+        },
+        cache: true
+      }
+    });
+</script>
+
 
 </body>
+
 </html>
