@@ -107,7 +107,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = "SHOWING REQUEST ".$address." ".$city." ".$state." ".$zip;
+    $mail->Subject = "SHOWING REQUEST - ".$address." ".$city." ".$state." ".$zip. " (MLS# ".$MLS.")";
     $mail->Body    = "Hello ".$full_name.", <br/><br/>Here are the details from your recent request:<br/><br/> <b>Property Address:</b> ".$address." ".$city." ".$state." ".$zip."<br/><br/><b>Lockbox location:</b> $location<br/><br/><b>Notes: </b> $notes<br/><br/><b>Combination (if applicable)</b></b>: $code<br/><br/><br/> After reviewing the property, please give feedback to showings@florostone.com";
     $mail->send();
 
@@ -133,7 +133,7 @@ try {
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = "Agent ".$full_name . " requested a showing for property " .$p_ID;
+    $mail->Subject = "SHOWING REQUEST - ".$address." ".$city." ".$state." ".$zip." (MLS# ".$MLS.")";
     $mail->Body    = "Agent ".$full_name ." requested a showing for property located at: <b><br/><br/>".$address." ".$city." ".$state." ".$zip."</b><br/><br/>Here are the details:<br/><br/><b>Agent Name:</b> $full_name<br/><br/><b>License #:</b> $agentID<br/><br/><b>Office Name:</b>$ofice_name<br/><br/><b>Email:</b> $email<br/><br/><b>Phone: </b>$phone<br/><br/>";;
     $mail->send();
 
