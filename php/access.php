@@ -79,13 +79,11 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
         echo "<p class='code'>".$code."</h2></p>";
         echo "<p><b>Notes: </b>  ".$notes."</p>";
 
-       
-
 
       } else if($type=="occ"){ //occupied 
     
-        echo "<br><br> <p> PROPERTY IS OCCUPIED";
-        echo"<br> <i>Do not go direct! </i><br></p>";
+        echo "<br><br><p> PROPERTY IS OCCUPIED<br/>";
+        echo"<br><i>Do not go direct! </i></br><br/><br/></p>";
         echo "<p><b>Notes: </b>  ".$notes."</p>";
         echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequests'> Submit request</a></p> ";
      }
