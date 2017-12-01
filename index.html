@@ -30,7 +30,7 @@
 
 <body>
 	<img id = "logo" src= "img/FSR_Logo.png"> 
-	<h2 class="center">Showings Request Information </h2><br>
+	<h2 class="center">Showings Request Information </h2><br/>
 	<div class="center">
 		<form action="php/access.php" method="post">
 			<div class="form-box">
@@ -140,7 +140,6 @@
            ready1 = false;
            ready();
         }
-        console.log(agentID);
     });
     $("input#fname").on('keyup keypress blur focus',function(){
         var fname = $('input#fname').val(); 
@@ -163,7 +162,6 @@
             ready2= false;
             ready();
         }
-        console.log(fname);
     });
     $("input#ofcname").on('keyup keypress blur focus',function(){
         var ofcname = $('input#ofcname').val(); 
@@ -186,7 +184,7 @@
             ready3= false;
             ready();
         }
-        console.log(ofcname);
+        
     });
      $("input#phone").on('keyup keypress blur focus',function(){
         var phone = $('input#phone').val(); 
@@ -209,7 +207,6 @@
             ready4= false;
             ready();
         }
-        console.log(phone);
     });
 
       $("input#email").on('keyup keypress blur focus',function(){
@@ -231,7 +228,6 @@
            ready5= true;
             ready();
         }
-        console.log(email);
     });
 });
 
