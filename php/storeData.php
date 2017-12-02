@@ -1,7 +1,12 @@
 <?php
 
 require 'PHPMailer/PHPMailerAutoload.php';
+require 'twilio-php-master/Twilio/autoload.php';
+
 include "dbconfig.php";
+
+use Twilio\Rest\Client;
+
 
 $agentID=$_POST ["agentID"];
 $full_name=$_POST ["fname"];
@@ -70,11 +75,58 @@ function submitShowing($agentID, $p_ID, $full_name, $ofice_name, $phone, $email,
 	if (mysqli_query($con, $query)) {
 		//send email after submission
 		sendEmail($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con);
+		sendText($phone, $p_ID, $con);
 	} else {
 		echo "Error: " . $query . "<br>" . mysqli_error($con);
 	}
 }
 
+}
+
+function sendText($phone, $p_ID, $con) { 
+	$query= "SELECT * FROM properties join propertyAccess on properties.MLS=propertyAccess.MLS WHERE properties.MLS = $p_ID ";
+
+	$result = mysqli_query($con, $query);
+	$row= mysqli_fetch_array($result);
+	$address= $row['address'];
+	$city= $row['city'];
+	$state= $row ['state']; 
+	$zip= $row ['zipcode']; 
+	$type= $row['type'];  // type= GSMLS? OCCUPIED? REGULAR LOCKBOX?
+	$code= $row['combo'];
+	$notes= $row['notes'];
+	$location=$row['location']; 
+
+	// Account SID and Auth Token from twilio.com/console
+	$sid = 'ACbf4b5801e5edb9703e8f7fcd8f9f28ad';
+	$token = '2372202532d86a661356788a2e65be4f';
+	$client = new Client($sid, $token);
+
+	$msg = '';
+
+	if ($type == "GSMLS") {
+		$msg = 'Property: ' . $address . ' ' . $city. ', ' . $state . '. Notes: ' . $notes;
+	} else if ($type == "r") {
+		$msg = 'Property: ' . $address . ' ' . $city. ', ' . $state . '. Code: ' . $code . ' . Notes: ' . $notes;
+	} else {
+		die;
+	}
+
+	// Use the client to do fun stuff like send text messages!
+	try {
+		$client->messages->create(
+		// the number you'd like to send the message to
+		$phone,
+		array(
+			// A Twilio phone number you purchased at twilio.com/console
+			'from' => '+19082743341',
+			// the body of the text message to send
+			'body' => $msg
+		)
+		);
+	} catch (Exception $e) {
+		echo 'Unable to send text message!';
+	}
 }
 
 function sendEmail($agentID, $full_name, $ofice_name, $phone, $email, $p_ID, $con){
