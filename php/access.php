@@ -48,7 +48,10 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
  <!-- Latest compiled and minified JavaScript -->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+  <link href="../Style/all/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="../Style/all/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../Style/all/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 </head>
 
 <body>
@@ -68,6 +71,7 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
         echo "<br> <p> <b>GSMLS LOCKBOX </b></p><br>";
         echo" <p><i>Use your Supra Key </i></p><br>";
         echo "<p><br><b>Notes: </b> ".$notes."</p>";
+        echo "<p class= 'feedback'>After viewing the property, please give us feedback at showings@florostone.com</p>";
         
        
 
@@ -78,6 +82,9 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
         echo "<br> Regular Lockbox Code: <br></p>";
         echo "<p class='code'>".$code."</h2></p>";
         echo "<p><b>Notes: </b>  ".$notes."</p>";
+        echo "<p class= 'feedback'>After viewing the property, please give us feedback at showings@florostone.com</p>";
+        
+
 
 
       } else if($type=="occ"){ //occupied 
@@ -85,14 +92,15 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
         echo "<br><br><p> PROPERTY IS OCCUPIED<br/>";
         echo"<br><i>Do not go direct! </i></br><br/><br/></p>";
         echo "<p><b>Notes: </b>  ".$notes."</p>";
-        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequests'> Submit request</a></p> ";
+        echo "<br><p><a href ='#' data-toggle='modal' data-target='#occupiedRequests'>Request Showing</a></p> ";
      }
      
     ?> 
+
       </div>
 
       <div>
-        <button type="button" class="btn btn-primary center btn-lg" data-toggle="modal" data-target="#newRequest">New Request </button>
+        <button type="button" class="btn btn-primary center btn-lg" data-toggle="modal" data-target="#newRequest">New Property Request </button>
       </div>
 
       <div class="box">
@@ -183,10 +191,44 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Showing Request</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+
+        <?php  echo "<p class='notes'>".$notes."</p>"?>
+        <p>Please select up to two days and times that you will like to show the property. If the first date provided is not confirmed with the tenants, we will request to show on the second date. <br><br></p>
+
+        <form action="showingRequest.php"  method="post">
+          <input type="hidden" value="<?php echo $agentID; ?>" name="agentID" />
+          <input type="hidden" value="<?php echo $email; ?>" name="email" />
+          <input type="hidden" value="<?php echo $p_ID; ?>" name="MLS" />
+          <input type="hidden" value="<?php echo $phone; ?>" name="phone" />
+          <input type="hidden" value="<?php echo $full_name; ?>" name="fname" />
+          <input type="hidden" value="<?php echo $ofice_name; ?>" name="ofcname" />
+          <fieldset>
+            <div class="control-group">
+              <div class="controls input-append date form_datetime"  data-date-format="mm/dd/yyyy - HH:ii p" data-link-field="dtp_input1">
+                <label for= "date1"> Date and Time Option 1: </label>
+                <input class= "form-control" type="text" id ="date11" name="date1" required="required" placeholder="Select a date and time" style= "width: 200px;">
+                <span class="add-on" style="position: absolute;left: 369;font-size: 25px;top: 203px;"><i  class="icon-th glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <div class="control-group">
+              <div class="controls input-append date form_datetime2"  data-date-format="mm/dd/yyyy - HH:ii p" data-link-field="dtp_input1">
+              <label for= "date2" style= "padding-top: 14px;"> Date and Time Option 2:</label>
+              <input class= "form-control" type="text" id ="date2" name="date2" required="required" placeholder="Select a date and time" style= "width: 200px;"">
+                <span class="add-on" style="position: absolute;left: 369;font-size: 25px;top: 285px;" ><i  class="icon-th glyphicon glyphicon-calendar"></i></span>
+              </div>
+              </div>
+            </div>
+             </fieldset>
+             <center>
+             <input id= "submit" type="Submit" class="btn btn-primary center" value="Send Request"><br />
+              </center>
+        </form>
+        <br/><br/>
+        <p> We will email you at <?php echo "<b class ='highlight'> $email</b>" ?> with a confimation</p>
+        <br> 
+      <p>Thank You! We appreciate your feedback! </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -196,22 +238,49 @@ $fullAddress= $address.",".$city.", ".$state."  ".$zip;
   </div>
 </div>
 <script type="text/javascript">
-		
-		$('.itemName').select2({
-			placeholder: 'Start typing property address... ',
+
+      $('.form_datetime').datetimepicker({
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1 , 
+      });
+      $('.form_datetime').datetimepicker('setStartDate', new Date());
+
+      $('.form_datetime2').datetimepicker({
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1, 
+      });
+      $('.form_datetime2').datetimepicker('setStartDate', new Date());
+
+      $("span#calendar1").on('click',function(){
+        $("input#date11")[0].click();
+
+      });
+    
+    $('.itemName').select2({
+      placeholder: 'Start typing property address... ',
       minimumInputLength: 2,
-			ajax: {
-				url: 'propertyList.php',
-				dataType: 'json',
-				delay: 250,
-				processResults: function (data) {
-					return {
-						results: data
-					};
-				},
-				cache: true
-			}
-		});
+      ajax: {
+        url: 'propertyList.php',
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data) {
+          return {
+            results: data
+          };
+        },
+        cache: true
+      }
+    });
 </script>
 
 

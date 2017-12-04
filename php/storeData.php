@@ -193,7 +193,7 @@ try {
     $mail->send();
 
 } catch (Exception $e) {
-    echo 'Email Not Sent.';
+    echo ' Email Not Sent.';
 }	
 }
 
