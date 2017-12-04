@@ -115,8 +115,19 @@ text-align: center;
         height: 450px;  
         left: 50%;  
       }
-.glyphicon{
+.glyphicon-ok .glyphicon-remove .glyphicon-warning-sign{
 	position: absolute;
 	text-align: right;
 	left: 100%;
+}
+.notes{
+
+font-color: silver;
+
+}
+.feedback{
+
+    font-size: 14px;
+    padding-top: 60px;
+
 }
